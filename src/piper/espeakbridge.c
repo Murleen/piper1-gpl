@@ -20,6 +20,8 @@
 #define CLAUSE_COLON (30 | CLAUSE_INTONATION_FULL_STOP | CLAUSE_TYPE_CLAUSE)
 #define CLAUSE_SEMICOLON (30 | CLAUSE_INTONATION_COMMA | CLAUSE_TYPE_CLAUSE)
 
+extern int option_ssml;
+
 static PyObject *py_initialize(PyObject *self, PyObject *args) {
     const char *data_dir;
     if (!PyArg_ParseTuple(args, "s", &data_dir)) {
@@ -30,6 +32,8 @@ static PyObject *py_initialize(PyObject *self, PyObject *args) {
         PyErr_SetString(PyExc_RuntimeError, "Failed to initialize espeak-ng");
         return NULL;
     }
+
+    option_ssml = 1;
 
     Py_RETURN_NONE;
 }
